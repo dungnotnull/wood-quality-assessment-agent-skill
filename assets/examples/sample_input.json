@@ -1,0 +1,47 @@
+{
+  "assessment_request": {
+    "claimed_species": "Tectona grandis",
+    "claimed_origin": "Vietnam",
+    "intended_use": "Outdoor furniture manufacturing",
+    "market_region": "European Union",
+    "language": "en"
+  },
+  "sample_data": {
+    "sample_photos": [
+      {
+        "path": "/path/to/end_grain.jpg",
+        "type": "end_grain",
+        "magnification": 10,
+        "description": "End grain view showing growth rings"
+      },
+      {
+        "path": "/path/to/tangential.jpg",
+        "type": "tangential",
+        "magnification": 10,
+        "description": "Tangential section showing vessel arrangement"
+      }
+    ],
+    "physical_measurements": {
+      "moisture_pct": 14.5,
+      "moisture_method": "moisture_meter",
+      "density_kgm3": 620,
+      "density_method": "oven_dry_basis"
+    }
+  },
+  "documentation": {
+    "cites_permit": " Provided",
+    "origin_certificate": "VN-CERT-2024-001",
+    "fsc_certificate": null
+  },
+  "analysis_requirements": {
+    "checks": [
+      "species_identification",
+      "physical_properties",
+      "authenticity",
+      "cites_compliance",
+      "iucn_conservation",
+      "legality_verification",
+      "quality_grading"
+    ]
+  }
+}

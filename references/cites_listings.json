@@ -1,0 +1,114 @@
+[
+  {
+    "scientific_name": "Dalbergia nigra",
+    "appendix": "I",
+    "annotation": "All parts and derivatives",
+    "listing_date": "1992",
+    "notes": "Brazilian Rosewood - most restricted; commercial trade prohibited"
+  },
+  {
+    "scientific_name": "Dalbergia spp.",
+    "appendix": "II",
+    "annotation": "#15 - all parts except seeds, seedling cultures, finished musical instruments <=10kg, finished accessories/parts, non-commercial <=10kg. Excludes D. nigra.",
+    "listing_date": "2017",
+    "notes": "All rosewoods (300+ species) listed Jan 2017"
+  },
+  {
+    "scientific_name": "Pterocarpus erinaceus",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood",
+    "listing_date": "2017",
+    "notes": "African Rosewood/Kosso - high overexploitation"
+  },
+  {
+    "scientific_name": "Pterocarpus santalinus",
+    "appendix": "II",
+    "annotation": "Logs, wood chips, powder, extracts (not finished products)",
+    "listing_date": "1995",
+    "notes": "Red Sanders - Indian endemic"
+  },
+  {
+    "scientific_name": "Pterocarpus tinctorius",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer sheets",
+    "listing_date": "2022",
+    "notes": "Mukula/African padauk trade"
+  },
+  {
+    "scientific_name": "Swietenia macrophylla",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer. Neotropical populations only. Plantation exempt.",
+    "listing_date": "2003",
+    "notes": "Big-leaf Mahogany"
+  },
+  {
+    "scientific_name": "Swietenia mahagoni",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer. Neotropical only. Plantation exempt.",
+    "listing_date": "2003",
+    "notes": "Caribbean Mahogany"
+  },
+  {
+    "scientific_name": "Swietenia humilis",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer. Neotropical only. Plantation exempt.",
+    "listing_date": "2003",
+    "notes": "Pacific Coast Mahogany"
+  },
+  {
+    "scientific_name": "Cedrela odorata",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood. Neotropical populations.",
+    "listing_date": "2023",
+    "notes": "Spanish Cedar - listed at CoP19"
+  },
+  {
+    "scientific_name": "Handroanthus spp.",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood (selected Neotropical species)",
+    "listing_date": "2023",
+    "notes": "Ipe/Lapacho - newly listed"
+  },
+  {
+    "scientific_name": "Aquilaria spp.",
+    "appendix": "II",
+    "annotation": "All parts except seeds, pollen, seedling cultures, fruits, leaves, exhausted powder",
+    "listing_date": "2005",
+    "notes": "Agarwood - resinous infected wood is the trade product"
+  },
+  {
+    "scientific_name": "Gyrinops spp.",
+    "appendix": "II",
+    "annotation": "Same as Aquilaria",
+    "listing_date": "2005",
+    "notes": "Agarwood relatives"
+  },
+  {
+    "scientific_name": "Gonystylus spp.",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood, finished products",
+    "listing_date": "2003",
+    "notes": "Ramin - high illegal-logging history"
+  },
+  {
+    "scientific_name": "Diospyros spp.",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood, transformed wood (Madagascar populations)",
+    "listing_date": "2023",
+    "notes": "Ebony - Madagascar populations listed at CoP19"
+  },
+  {
+    "scientific_name": "Pericopsis elata",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood",
+    "listing_date": "1995",
+    "notes": "Afrormosia - African teak substitute"
+  },
+  {
+    "scientific_name": "Khaya spp.",
+    "appendix": "II",
+    "annotation": "Logs, sawn wood, veneer, plywood (Khaya grandifoliola populations)",
+    "listing_date": "2023",
+    "notes": "African mahogany - CoP19 listing"
+  }
+]

@@ -1,0 +1,731 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wood Quality Assessment - Tool Schemas",
+  "description": "JSON schemas for all tools used in the wood-quality-assessment skill",
+  "version": "1.0.0",
+  "toolSchemas": {
+    "WebSearch": {
+      "input": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 500,
+            "description": "Search query for domain data"
+          },
+          "allowed_domains": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Optional whitelist of domains"
+          },
+          "blocked_domains": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Optional blacklist of domains"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {"type": "string"},
+                "url": {"type": "string", "format": "uri"},
+                "snippet": {"type": "string"},
+                "source": {"type": "string"}
+              }
+            }
+          },
+          "total_found": {"type": "integer"},
+          "query_time_ms": {"type": "number"}
+        }
+      }
+    },
+    "WebFetch": {
+      "input": {
+        "type": "object",
+        "required": ["url"],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to fetch"
+          },
+          "timeout": {
+            "type": "integer",
+            "default": 30,
+            "maximum": 120,
+            "description": "Timeout in seconds"
+          },
+          "user_agent": {
+            "type": "string",
+            "description": "Custom user agent string"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string"},
+          "status_code": {"type": "integer"},
+          "content_type": {"type": "string"},
+          "content_length": {"type": "integer"},
+          "fetch_time_ms": {"type": "number"}
+        }
+      }
+    },
+    "ImageAnalysis": {
+      "input": {
+        "type": "object",
+        "required": ["image_path"],
+        "properties": {
+          "image_path": {
+            "type": "string",
+            "description": "Path or URL to image file"
+          },
+          "analysis_type": {
+            "type": "string",
+            "enum": ["grain", "figure", "end_grain", "tangential", "radial"],
+            "description": "Type of wood anatomy analysis"
+          },
+          "magnification": {
+            "type": "number",
+            "default": 10,
+            "description": "Magnification level for microscopy"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "vessel_arrangement",
+                "vessel_size",
+                "ray_width",
+                "ray_height",
+                "parenchyma_pattern",
+                "ring_density",
+                "ring_boundaries",
+                "fiber_thickness",
+                "color",
+                "texture"
+              ]
+            },
+            "description": "IAWA features to extract"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "wood_type": {
+            "type": "string",
+            "enum": ["hardwood", "softwood", "unknown"]
+          },
+          "porosity": {
+            "type": "string",
+            "enum": ["ring porous", "semi-ring porous", "diffuse porous", "tracheid", "unknown"]
+          },
+          "iawa_features": {
+            "type": "object",
+            "description": "Extracted IAWA feature codes and values"
+          },
+          "candidate_genera": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Candidate genera based on anatomical features"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["High", "Medium", "Low", "Very Low"]
+          },
+          "analysis_time_ms": {"type": "number"}
+        }
+      }
+    },
+    "Skill": {
+      "input": {
+        "type": "object",
+        "required": ["skill"],
+        "properties": {
+          "skill": {
+            "type": "string",
+            "description": "Name of skill to invoke"
+          },
+          "args": {
+            "type": "string",
+            "description": "Optional arguments to pass to skill"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "result": {"type": "object"},
+          "skill_name": {"type": "string"},
+          "execution_time_ms": {"type": "number"},
+          "gate_results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "gate": {"type": "string"},
+                "passed": {"type": "boolean"},
+                "auto_fixed": {"type": "boolean"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "Read": {
+      "input": {
+        "type": "object",
+        "required": ["file_path"],
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Absolute path to file"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Line number to start reading"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of lines to read"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string"},
+          "lines_read": {"type": "integer"},
+          "file_size": {"type": "integer"},
+          "read_time_ms": {"type": "number"}
+        }
+      }
+    },
+    "Write": {
+      "input": {
+        "type": "object",
+        "required": ["file_path", "content"],
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Absolute path to file"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content to write"
+          },
+          "create_dirs": {
+            "type": "boolean",
+            "default": true,
+            "description": "Create parent directories if needed"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "bytes_written": {"type": "integer"},
+          "write_time_ms": {"type": "number"},
+          "success": {"type": "boolean"}
+        }
+      }
+    },
+    "Bash": {
+      "input": {
+        "type": "object",
+        "required": ["command"],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to execute"
+          },
+          "timeout": {
+            "type": "integer",
+            "default": 120,
+            "maximum": 600,
+            "description": "Timeout in seconds"
+          },
+          "working_directory": {
+            "type": "string",
+            "description": "Directory to execute in"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "stdout": {"type": "string"},
+          "stderr": {"type": "string"},
+          "exit_code": {"type": "integer"},
+          "execution_time_ms": {"type": "number"}
+        }
+      }
+    }
+  },
+  "subSkillSchemas": {
+    "sub-gather-requirements": {
+      "input": {
+        "type": "object",
+        "properties": {
+          "raw_user_input": {"type": "string"},
+          "attached_files": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "claimed_species",
+          "sample_photos",
+          "moisture_pct",
+          "moisture_method",
+          "density_kgm3",
+          "claimed_origin",
+          "intended_use",
+          "market_region",
+          "language",
+          "analysis_type"
+        ],
+        "properties": {
+          "claimed_species": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "array", "items": {"type": "string"}}
+            ]
+          },
+          "sample_photos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {"type": "string"},
+                "type": {
+                  "type": "string",
+                  "enum": ["end_grain", "tangential", "radial", "figure"]
+                },
+                "magnification": {"type": "number"}
+              }
+            }
+          },
+          "moisture_pct": {"type": "number"},
+          "moisture_method": {
+            "type": "string",
+            "enum": ["oven_dry", "moisture_meter", "unknown"]
+          },
+          "density_kgm3": {"type": "number"},
+          "claimed_origin": {"type": "string"},
+          "intended_use": {"type": "string"},
+          "market_region": {"type": "string"},
+          "language": {
+            "type": "string",
+            "enum": ["en", "vi", "other"]
+          },
+          "analysis_type": {
+            "type": "string",
+            "enum": ["combined", "anatomy_only", "physical_only", "compliance_only"]
+          }
+        }
+      }
+    },
+    "sub-evidence-collector": {
+      "input": {
+        "type": "object",
+        "required": ["claimed_species", "language"],
+        "properties": {
+          "claimed_species": {"type": "string"},
+          "candidate_species_group": {"type": "string"},
+          "language": {"type": "string"}
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["cites_status", "iucn_status", "legality_requirements", "anatomy_reference", "physical_benchmarks"],
+        "properties": {
+          "cites_status": {
+            "type": "object",
+            "properties": {
+              "appendix": {"type": "string"},
+              "effective_date": {"type": "string"},
+              "access_date": {"type": "string"},
+              "source": {"type": "string"}
+            }
+          },
+          "iucn_status": {
+            "type": "object",
+            "properties": {
+              "category": {"type": "string"},
+              "code": {"type": "string"},
+              "access_date": {"type": "string"},
+              "source": {"type": "string"}
+            }
+          },
+          "legality_requirements": {
+            "type": "object",
+            "properties": {
+              "market": {"type": "string"},
+              "regulations": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "documentation_required": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "anatomy_reference": {
+            "type": "object",
+            "properties": {
+              "source": {"type": "string"},
+              "url": {"type": "string"},
+              "diagnostic_features": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "physical_benchmarks": {
+            "type": "object",
+            "properties": {
+              "density_range": {
+                "type": "object",
+                "properties": {
+                  "min": {"type": "number"},
+                  "max": {"type": "number"},
+                  "typical": {"type": "number"}
+                }
+              },
+              "moisture_requirements": {
+                "type": "object",
+                "properties": {
+                  "green_max": {"type": "number"},
+                  "fad_range": {"type": "array"},
+                  "kd_target": {"type": "number"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sub-grain-image-analysis": {
+      "input": {
+        "type": "object",
+        "required": ["sample_photos"],
+        "properties": {
+          "sample_photos": {
+            "type": "array",
+            "items": {"type": "object"}
+          },
+          "anatomy_reference": {"type": "object"}
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["wood_type", "iawa_features", "candidate_species_group", "confidence"],
+        "properties": {
+          "wood_type": {"type": "string"},
+          "porosity": {"type": "string"},
+          "iawa_features": {
+            "type": "object",
+            "properties": {
+              "vessel_arrangement": {"type": "string"},
+              "ray_width": {"type": "string"},
+              "parenchyma_pattern": {"type": "string"},
+              "ring_density_per_mm": {"type": "number"},
+              "ring_boundaries_distinct": {"type": "boolean"}
+            }
+          },
+          "candidate_species_group": {"type": "string"},
+          "confidence": {"type": "string"},
+          "observed_vs_reference_mismatches": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "image_quality_assessment": {"type": "string"}
+        }
+      }
+    },
+    "sub-physical-property-analysis": {
+      "input": {
+        "type": "object",
+        "required": ["moisture_pct", "density_kgm3"],
+        "properties": {
+          "moisture_pct": {"type": "number"},
+          "density_kgm3": {"type": "number"},
+          "physical_benchmarks": {"type": "object"}
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["moisture_condition", "density_vs_benchmark", "drying_adequacy"],
+        "properties": {
+          "moisture_pct": {"type": "number"},
+          "moisture_condition": {
+            "type": "string",
+            "enum": ["green", "above_fad", "fad", "ad", "kd", "overdried"]
+          },
+          "density_vs_benchmark": {
+            "type": "object",
+            "properties": {
+              "measured": {"type": "number"},
+              "benchmark_typical": {"type": "number"},
+              "deviation_percent": {"type": "number"},
+              "assessment": {"type": "string"}
+            }
+          },
+          "drying_adequacy": {"type": "string"},
+          "mechanical_grade_indication": {"type": "string"},
+          "shrinkage_estimate": {"type": "string"}
+        }
+      }
+    },
+    "sub-authenticity-compliance": {
+      "input": {
+        "type": "object",
+        "required": ["claimed_species", "candidate_species", "evidence_bundle"],
+        "properties": {
+          "claimed_species": {"type": "string"},
+          "candidate_species": {"type": "string"},
+          "evidence_bundle": {"type": "object"}
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["species_match", "substitution_risk", "cites_violation", "iucn_concern", "legality_status"],
+        "properties": {
+          "species_match": {"type": "boolean"},
+          "substitution_risk": {
+            "type": "string",
+            "enum": ["none", "low", "medium", "high"]
+          },
+          "cites_violation": {"type": "boolean"},
+          "iucn_concern": {"type": "boolean"},
+          "legality_status": {
+            "type": "string",
+            "enum": ["compliant", "non_compliant", "suspicious", "unknown"]
+          },
+          "origin_consistency": {"type": "string"},
+          "recommended_followup_tests": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "sub-knowledge-updater": {
+      "input": {
+        "type": "object",
+        "required": ["topic_keywords"],
+        "properties": {
+          "topic_keywords": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["citations", "evidence_coverage", "knowledge_gaps"],
+        "properties": {
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "section": {"type": "string"},
+                "title": {"type": "string"},
+                "tier": {"type": "string"},
+                "year": {"type": "integer"}
+              }
+            }
+          },
+          "evidence_coverage": {
+            "type": "string",
+            "enum": ["Strong", "Moderate", "Weak", "None"]
+          },
+          "knowledge_gaps": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "sub-quality-advisor": {
+      "input": {
+        "type": "object",
+        "required": ["anatomy_scorecard", "physical_scorecard", "compliance_inputs"],
+        "properties": {
+          "anatomy_scorecard": {"type": "object"},
+          "physical_scorecard": {"type": "object"},
+          "compliance_inputs": {"type": "object"},
+          "knowledge_evidence": {"type": "object"}
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": ["verdict", "grade", "disclosure"],
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": ["Authentic", "Suspected Adulteration", "Prohibited", "Non-compliant", "Inconclusive"]
+          },
+          "grade": {
+            "type": "string",
+            "enum": ["A", "B", "C", "Fail"]
+          },
+          "best_scenario": {"type": "string"},
+          "base_scenario": {"type": "string"},
+          "worst_scenario": {"type": "string"},
+          "key_risks": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "evidence_chain": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "remediation_actions": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "disclosure": {"type": "string"}
+        }
+      }
+    }
+  },
+  "qualityGateSchemas": {
+    "U1": {
+      "name": "Source Citation Count",
+      "description": "At least 3 sources cited, with 1 academic/authoritative",
+      "validation": {
+        "min_sources": 3,
+        "min_authoritative": 1,
+        "authoritative_domains": [
+          ".edu",
+          ".gov",
+          "iucnredlist.org",
+          "checklist.cites.org",
+          "itto.int",
+          "fsc.org",
+          "pefc.org"
+        ]
+      }
+    },
+    "U2": {
+      "name": "Risk Disclosure",
+      "description": "Safety/risk/limitation disclosure before recommendation",
+      "validation": {
+        "disclosure_keywords": ["risk", "limitation", "uncertainty", "disclaimer"],
+        "position": "before_verdict"
+      }
+    },
+    "U3": {
+      "name": "Evidence Hierarchy",
+      "description": "Evidence tier stated per source",
+      "validation": {
+        "tiers": ["Tier 1", "Tier 2", "Tier 3", "Tier 4"],
+        "required_per_source": true
+      }
+    },
+    "U4": {
+      "name": "Language Consistency",
+      "description": "Output matches user language preference",
+      "validation": {
+        "supported_languages": ["en", "vi"],
+        "detect_from_input": true
+      }
+    },
+    "U5": {
+      "name": "Output Template",
+      "description": "All required sections present",
+      "validation": {
+        "required_sections": 12,
+        "section_names": [
+          "title",
+          "executive_summary",
+          "assessment_inputs",
+          "anatomical_analysis",
+          "physical_property_analysis",
+          "authenticity_assessment",
+          "compliance_status",
+          "verdict",
+          "quality_grade",
+          "risk_assessment",
+          "evidence_chain",
+          "recommended_actions",
+          "disclosure"
+        ]
+      }
+    },
+    "U6": {
+      "name": "Claim Traceability",
+      "description": "Every claim traceable to source or flagged",
+      "validation": {
+        "citation_required": true,
+        "judgment_flagging": true,
+        "citation_pattern": "\\[\\d+\\]"
+      }
+    },
+    "G1": {
+      "name": "Species Identification Confidence",
+      "description": "Confidence level explicitly stated with justification",
+      "validation": {
+        "confidence_levels": ["High", "Medium", "Low", "Very Low"],
+        "requires_justification": true
+      }
+    },
+    "G2": {
+      "name": "Physical Benchmark Comparison",
+      "description": "Moisture and density compared to species benchmarks",
+      "validation": {
+        "required_comparisons": ["moisture", "density"],
+        "benchmark_source_required": true
+      }
+    },
+    "G3": {
+      "name": "CITES/IUCN Verification",
+      "description": "CITES and IUCN status checked for claimed species",
+      "validation": {
+        "required_checks": ["cites", "iucn"],
+        "access_date_required": true
+      }
+    },
+    "G4": {
+      "name": "Legality Assessment",
+      "description": "Market-specific legality requirements assessed",
+      "validation": {
+        "target_market_required": true,
+        "regulation_names_required": true
+      }
+    },
+    "G5": {
+      "name": "Verdict Category",
+      "description": "Verdict exactly one of 5 defined categories",
+      "validation": {
+        "valid_verdicts": [
+          "Authentic",
+          "Suspected Adulteration",
+          "Prohibited",
+          "Non-compliant",
+          "Inconclusive"
+        ]
+      }
+    }
+  }
+}

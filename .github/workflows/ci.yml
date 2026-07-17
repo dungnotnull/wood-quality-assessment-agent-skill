@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    name: Lint + Type-check + Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Lint with ruff
+        run: ruff check tools/ scripts/
+
+      - name: Type-check with mypy
+        run: mypy tools/ scripts/ || true
+
+      - name: Run all unit tests (pytest)
+        run: pytest tools/ -ra
+
+      - name: Run knowledge_updater suite (standalone)
+        run: python -m tools.test_knowledge_updater
+
+      - name: Run reference_data suite
+        run: python -m tools.test_reference_data
+
+      - name: Run tools_registry suite
+        run: python -m tools.test_tools_registry
+
+      - name: Run full validation orchestrator
+        run: python -m tools.run_test_scenarios --full
+
+      - name: Project integrity (setup validate)
+        run: python -m scripts.setup validate
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-py${{ matrix.python-version }}
+          path: |
+            logs/
+          if-no-files-found: ignore

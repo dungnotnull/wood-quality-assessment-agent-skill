@@ -1,0 +1,184 @@
+# Wood Quality Assessment - Production Configuration
+# This file manages all system-wide configuration, feature flags, and LLM parameters
+
+# System Information
+system:
+  name: "wood-quality-assessment"
+  version: "1.0.0"
+  environment: "production"
+  description: "Solid Wood & Handicraft Quality Assessment — Wood Quality & Forestry-Standards Compliance evidence-backed analysis harness"
+
+# Skill Registry Configuration
+skill_registry:
+  enabled: true
+  auto_discovery: true
+  scan_paths:
+    - "skills/"
+    - "skills/sub-skills/"
+  schema_validation: true
+  cache_ttl: 3600
+
+# Hooks Configuration
+hooks:
+  lifecycle:
+    before_skill_invoke: true
+    after_skill_invoke: true
+    on_skill_error: true
+    before_quality_gate: true
+    after_quality_gate: true
+  state:
+    sync_interval: 100
+    persistence_enabled: true
+    state_file: ".state/skill_state.json"
+  events:
+    emit_enabled: true
+    log_events: true
+    event_handlers:
+      - "skill_invoke"
+      - "gate_failure"
+      - "state_change"
+
+# Tool Configuration
+tools:
+  web_search:
+    enabled: true
+    timeout_seconds: 30
+    max_retries: 3
+    rate_limit: 10
+  web_fetch:
+    enabled: true
+    timeout_seconds: 45
+    max_retries: 3
+    user_agent: "wood-quality-assessment/1.0"
+  image_analysis:
+    enabled: true
+    max_resolution: 4096
+    supported_formats:
+      - "jpg"
+      - "jpeg"
+      - "png"
+      - "webp"
+
+# LLM Parameters
+llm:
+  model: "claude-sonnet-4-6"
+  temperature: 0.3
+  max_tokens: 4096
+  top_p: 0.95
+  context_window: 200000
+  timeout_seconds: 120
+
+# Quality Gate Configuration
+quality_gates:
+  strict_mode: true
+  auto_fix_enabled: true
+  max_retries: 2
+  gates:
+    universal:
+      - "U1"
+      - "U2"
+      - "U3"
+      - "U4"
+      - "U5"
+      - "U6"
+    domain:
+      - "G1"
+      - "G2"
+      - "G3"
+      - "G4"
+      - "G5"
+
+# Knowledge Base Configuration
+knowledge_base:
+  primary_file: "SECOND-KNOWLEDGE-BRAIN.md"
+  sections: 7
+  crawl_interval_hours: 168
+  update_schedule:
+    academic: "weekly"
+    news: "daily"
+  dedup_method: "sha256"
+  scoring_weights:
+    recency: 0.4
+    relevance: 0.4
+    citations: 0.2
+
+# Output Configuration
+output:
+  template_engine: "markdown"
+  language_detection: true
+  supported_languages:
+    - "en"
+    - "vi"
+  template_path: "references/templates/"
+  required_sections: 12
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "structured"
+  output: "logs/"
+  rotation: "daily"
+  retention_days: 30
+  structured_fields:
+    - "timestamp"
+    - "level"
+    - "skill"
+    - "gate"
+    - "language"
+    - "duration_ms"
+
+# Error Handling
+error_handling:
+  graceful_degradation: true
+  fallback_chain:
+    - "live_source"
+    - "knowledge_base"
+    - "cached_data"
+    - "limitation_flag"
+  retry_strategies:
+    exponential_backoff: true
+    max_backoff_seconds: 32
+    jitter: true
+
+# Performance Optimization
+performance:
+  context_optimization: true
+  token_budgeting: true
+  max_token_percent: 80
+  compression_enabled: true
+  cache_results: true
+  cache_ttl_seconds: 3600
+
+# Feature Flags
+features:
+  multi_language_support: true
+  image_analysis: true
+  real_time_verification: true
+  batch_processing: false
+  api_mode: false
+  webhook_notifications: false
+
+# Security
+security:
+  validate_urls: true
+  sanitize_inputs: true
+  rate_limiting: true
+  audit_logging: true
+  max_request_size_mb: 50
+
+# Monitoring & Observability
+monitoring:
+  metrics_enabled: true
+  trace_enabled: true
+  health_check_interval: 300
+  alert_thresholds:
+    error_rate_percent: 5
+    latency_seconds: 30
+    token_usage_percent: 90
+
+# Development/Debug (disabled in production)
+debug:
+  verbose_logging: false
+  print_raw_outputs: false
+  skip_quality_gates: false
+  mock_externals: false

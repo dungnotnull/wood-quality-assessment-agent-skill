@@ -1,0 +1,199 @@
+[
+  {
+    "scientific_name": "Dalbergia nigra",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Dalbergia latifolia",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Dalbergia retusa",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2020
+  },
+  {
+    "scientific_name": "Dalbergia oliveri",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2020
+  },
+  {
+    "scientific_name": "Pterocarpus erinaceus",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2020
+  },
+  {
+    "scientific_name": "Pterocarpus santalinus",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Pterocarpus soyauxii",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Swietenia macrophylla",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2018
+  },
+  {
+    "scientific_name": "Entandrophragma cylindricum",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2018
+  },
+  {
+    "scientific_name": "Khaya ivorensis",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2018
+  },
+  {
+    "scientific_name": "Cedrela odorata",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2018
+  },
+  {
+    "scientific_name": "Handroanthus impetiginosus",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Shorea negrosensis",
+    "category": "CR",
+    "category_full": "Critically Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Quercus alba",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Quercus rubra",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Quercus robur",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Diospyros crassiflora",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Aquilaria malaccensis",
+    "category": "CR",
+    "category_full": "Critically Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Gonystylus bancanus",
+    "category": "CR",
+    "category_full": "Critically Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Intsia bijuga",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2018
+  },
+  {
+    "scientific_name": "Pericopsis elata",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Microberlinia brazzavillensis",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing",
+    "assessed_year": 2019
+  },
+  {
+    "scientific_name": "Millettia leucantha",
+    "category": "VU",
+    "category_full": "Vulnerable",
+    "trend": "Decreasing",
+    "assessed_year": 2020
+  },
+  {
+    "scientific_name": "Tectona grandis",
+    "category": "EN",
+    "category_full": "Endangered",
+    "trend": "Decreasing (natural populations)",
+    "assessed_year": 2019,
+    "notes": "Natural populations Endangered; plantation teak widely LC in trade"
+  },
+  {
+    "scientific_name": "Pinus sylvestris",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Picea abies",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Acer saccharum",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2017
+  },
+  {
+    "scientific_name": "Betula alleghaniensis",
+    "category": "LC",
+    "category_full": "Least Concern",
+    "trend": "Stable",
+    "assessed_year": 2014
+  }
+]

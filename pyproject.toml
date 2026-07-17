@@ -1,0 +1,98 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "wood-quality-assessment"
+version = "1.1.0"
+description = "Solid Wood & Handicraft Quality Assessment — Wood Quality & Forestry-Standards Compliance evidence-backed analysis harness for Claude Code."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "wood-quality-assessment contributors" }
+]
+keywords = [
+    "wood",
+    "timber",
+    "forestry",
+    "CITES",
+    "IUCN",
+    "wood-identification",
+    "IAWA",
+    "timber-legality",
+    "EUTR",
+    "Lacey-Act",
+    "VNFOREST",
+    "quality-assessment",
+    "claude-code",
+    "skill"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: Legal Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "feedparser>=6.0.10",
+    "python-dateutil>=2.8.2",
+    "jsonschema>=4.20.0",
+    "PyYAML>=6.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1.0",
+    "mypy>=1.5",
+]
+crawl = [
+    "crawl4ai>=0.3.0",
+]
+
+[project.scripts]
+wqa-knowledge-update = "tools.knowledge_updater:main"
+wqa-test-scenarios = "tools.run_test_scenarios:main"
+wqa-test-knowledge = "tools.test_knowledge_updater:run_all"
+wqa-test-reference = "tools.test_reference_data:run_all"
+wqa-test-tools = "tools.test_tools_registry:run_all"
+wqa-reference-data = "scripts.reference_data:_cli"
+wqa-tools = "scripts.tools_registry:_cli"
+wqa-seed-references = "scripts.seed_reference_data:main"
+wqa-setup = "scripts.setup:main"
+
+[project.urls]
+Homepage = "https://github.com/972026/wood-quality-assessment"
+Repository = "https://github.com/972026/wood-quality-assessment"
+Issues = "https://github.com/972026/wood-quality-assessment/issues"
+
+[tool.setuptools]
+packages = ["tools", "scripts"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tools"]
+python_files = ["test_*.py"]
+addopts = "-ra -q"

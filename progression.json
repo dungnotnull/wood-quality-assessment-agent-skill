@@ -1,0 +1,289 @@
+{
+  "skill": "wood-quality-assessment",
+  "version": "1.1.0",
+  "status": "production",
+  "phases": {
+    "phase0": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Research & Skill Architecture",
+      "deliverables": [
+        "CLAUDE.md",
+        "PROJECT-detail.md",
+        "PROJECT-DEVELOPMENT-PHASE-TRACKING.md"
+      ]
+    },
+    "phase1": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Core Sub-Skills",
+      "deliverables": [
+        "skills/sub-gather-requirements.md",
+        "skills/sub-evidence-collector.md",
+        "skills/sub-grain-image-analysis.md",
+        "skills/sub-physical-property-analysis.md",
+        "skills/sub-authenticity-compliance.md",
+        "skills/sub-knowledge-updater.md",
+        "skills/sub-quality-advisor.md"
+      ],
+      "details": {
+        "species_lookup_table": "70+ species with scientific names, families, density ranges",
+        "iawa_feature_codes": "Full IAWA hardwood (codes 1-122) and softwood (codes S1-S27) feature lists",
+        "cites_protected_species": "25+ timber genera with Appendix status, effective dates, annotations",
+        "iucn_status_reference": "20+ key commercial species with IUCN categories and population trends",
+        "legality_frameworks": "EUTR/EUDR, US Lacey Act, VNFOREST VNTLAS, Japan Clean Wood Act, Australia ILPA",
+        "physical_benchmarks": "MC states, EMC table, density classification, EN 338 grades, T/R ratios",
+        "substitution_patterns": "10 known substitution pairs with detection difficulty and discriminators"
+      }
+    },
+    "phase2": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Main Harness + Quality Gates",
+      "deliverables": [
+        "skills/main.md"
+      ],
+      "details": {
+        "quality_gates": "6 universal gates (U1-U6) + 5 domain gates (G1-G5)",
+        "degradation_levels": "5 levels (0-4) with explicit LIMITATION banners",
+        "language_detection": "Vietnamese (vi) + English (en) with full translation table",
+        "auto_fix_logic": "2-attempt auto-fix per gate with explicit remapping tables",
+        "error_recovery": "8 error types with detection + recovery strategies + max retries",
+        "output_template": "12-section report template with mandatory disclosure before verdict"
+      }
+    },
+    "phase3": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Knowledge Pipeline + Tests",
+      "deliverables": [
+        "SECOND-KNOWLEDGE-BRAIN.md",
+        "tools/__init__.py",
+        "tools/knowledge_updater.py",
+        "tools/test_knowledge_updater.py"
+      ],
+      "details": {
+        "kb_sections": "7 sections covering IAWA, MC/drying, density/mechanics, CITES, standards, papers, methods",
+        "paper_citations": "14 DOIs with Tier labels in SKB",
+        "crawl_pipeline": "ArXiv + Semantic Scholar + RSS feeds with SHA256 dedup + scoring + structured logging + dataclass model",
+        "test_coverage": "20 unit tests for knowledge_updater.py (pytest-compatible + standalone runner)"
+      }
+    },
+    "phase4": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Testing & Validation",
+      "deliverables": [
+        "tests/test-scenarios.md",
+        "tools/run_test_scenarios.py",
+        "tests/TEST_RESULTS.md"
+      ],
+      "details": {
+        "test_scenarios": "7 concrete scenarios with real wood species data",
+        "scenario_coverage": {
+          "verdicts": "AUTHENTIC, SUSPECTED ADULTERATION, PROHIBITED, NON-COMPLIANT, INCONCLUSIVE (all 5 covered)",
+          "gates": "All 11 gates (U1-U6, G1-G5) exercised across scenarios",
+          "languages": "en + vi",
+          "species": "Tectona grandis, Dalbergia latifolia/oliveri/retusa, D. nigra, Entandrophragma cylindricum, Quercus alba/rubra, Pterocarpus erinaceus",
+          "markets": "EU, USA, Vietnam, Global",
+          "citizens_statuses": "Appendix I, Appendix II, Not listed"
+        },
+        "test_orchestrator": "251 validation checks: file structure, sub-skill content, knowledge base, scenario definitions, gate coverage, verdict coverage, harness architecture, cross-references",
+        "test_results": "251/251 passed, 0 failed"
+      }
+    },
+    "phase5": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Integration & Polish + Open-Source Release",
+      "deliverables": [
+        "CLAUDE.md (updated)",
+        "README.md (updated)",
+        "PROJECT-DEVELOPMENT-PHASE-TRACKING.md (finalized)",
+        "progression.json",
+        "pyproject.toml",
+        "requirements-dev.txt",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "SECURITY.md",
+        ".github/workflows/ci.yml"
+      ],
+      "details": {
+        "final_validation": "Full test suite passed with 251/251 checks + 20/20 unit tests",
+        "cross_references": "CLAUDE.md references all sub-skills, knowledge base, and tools",
+        "phase_tracking": "All 6 phases (0-5) marked 100% complete",
+        "packaging": "pyproject.toml with CLI entry points, ruff/mypy/pytest config",
+        "ci": "GitHub Actions workflow: lint + type-check + tests on Python 3.11/3.12",
+        "community_files": "CONTRIBUTING, CHANGELOG, CODE_OF_CONDUCT, SECURITY",
+        "production_ready": true
+      }
+    },
+    "phase6": {
+      "status": "completed",
+      "completion": 100,
+      "description": "Grounding Layer, Executable Tools Registry & Chain-of-Thought Router",
+      "deliverables": [
+        "references/species_database.json",
+        "references/cites_listings.json",
+        "references/iucn_status.json",
+        "scripts/seed_reference_data.py",
+        "scripts/reference_data.py",
+        "scripts/tools_registry.py",
+        "skills/sub-router.md",
+        "assets/examples/sample_output.md",
+        "tools/test_reference_data.py",
+        "tools/test_tools_registry.py"
+      ],
+      "details": {
+        "reference_grounding": "28 curated species profiles + 16 CITES listings + 28 IUCN assessments with cross-key integrity",
+        "grounding_api": "reference_data.py: fuzzy (Levenshtein<=2) species resolution, genus-aware CITES/IUCN lookup, density comparison, moisture classification, substitution-risk scoring",
+        "executable_tools": "tools_registry.py: 8 JSON-Schema-bound offline-safe handlers (lookup_species/cites/iucn, compare_density, classify_moisture, assess_substitution, validate_schema, quality_gate)",
+        "router": "sub-router.md chain-of-thought router invoked as Step 1.5; run/skip plan + degradation forecast + limitation notes",
+        "example_output": "assets/examples/sample_output.md golden report (Scenario 1, Teak, vi) demonstrating 11/11 gates passing",
+        "unit_tests": "52 reference-data tests + 52 tools-registry tests",
+        "setup_validation": "scripts/setup.py health report now 61 checks (incl. reference data + tools bootstrap)"
+      }
+    }
+  },
+  "files": {
+    "skills": 9,
+    "tests": 2,
+    "tools": 9,
+    "docs": 11,
+    "config": 8,
+    "references": 4,
+    "assets": 3,
+    "total": 42,
+    "scripts": 7
+  },
+  "quality_gates": {
+    "universal": [
+      "U1",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6"
+    ],
+    "domain_specific": [
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5"
+    ],
+    "total": 11
+  },
+  "last_updated": "2026-07-17",
+  "architectural_enhancements": {
+    "hooks_system": {
+      "file": "scripts/hooks_system.py",
+      "features": [
+        "8 lifecycle hook points",
+        "Event emission and logging",
+        "State management with persistence",
+        "Thread-safe execution",
+        "Built-in logging and alert hooks"
+      ]
+    },
+    "skill_registry": {
+      "file": "SKILL.md",
+      "features": [
+        "Comprehensive registration documentation",
+        "Input/output JSON schemas",
+        "Quality gate schemas",
+        "Hook point documentation",
+        "Extension guide"
+      ]
+    },
+    "skill_loader": {
+      "file": "scripts/skill_loader.py",
+      "features": [
+        "Dynamic skill discovery",
+        "YAML frontmatter parsing",
+        "Fuzzy matching resolution",
+        "LRU caching with TTL",
+        "Registry export"
+      ]
+    },
+    "validator": {
+      "file": "scripts/validator.py",
+      "features": [
+        "JSON Schema validation",
+        "Input/output validation",
+        "Quality gate checking",
+        "Comprehensive error reporting"
+      ]
+    },
+    "modular_directories": {
+      "config": [
+        "settings.yaml",
+        "schemas/tool_schemas.json"
+      ],
+      "scripts": [
+        "hooks_system.py",
+        "skill_loader.py",
+        "validator.py",
+        "reference_data.py",
+        "tools_registry.py",
+        "seed_reference_data.py",
+        "setup.py"
+      ],
+      "references": [
+        "templates/output_template.md",
+        "species_database.json",
+        "cites_listings.json",
+        "iucn_status.json"
+      ],
+      "assets": [
+        "diagrams/system_architecture.md",
+        "examples/sample_input.json",
+        "examples/sample_output.md"
+      ]
+    },
+    "reference_data": {
+      "file": "scripts/reference_data.py",
+      "features": [
+        "Lazy-loaded thread-safe grounding datasets",
+        "Fuzzy Levenshtein species resolution (<=2)",
+        "Genus-aware CITES/IUCN lookup with severity tie-break",
+        "Density comparison and moisture classification",
+        "Substitution-risk scoring (documented substitute / density gap)",
+        "CLI for ad-hoc lookups"
+      ]
+    },
+    "tools_registry": {
+      "file": "scripts/tools_registry.py",
+      "features": [
+        "8 JSON-Schema-bound executable tool handlers",
+        "Schema-validated input+output execution",
+        "Graceful handler-failure degradation (never raises)",
+        "execute_many plan runner",
+        "CLI for inspection and execution"
+      ]
+    },
+    "router": {
+      "file": "skills/sub-router.md",
+      "features": [
+        "Chain-of-thought routing plan",
+        "analysis_type-aware run/skip dispatch",
+        "Per-step degradation forecast",
+        "Routing quality gates R1-R4"
+      ]
+    }
+  },
+  "test_run": {
+    "date": "2026-07-17",
+    "validation_passed": 251,
+    "validation_failed": 0,
+    "unit_tests_passed": 124,
+    "unit_tests_failed": 0,
+    "unit_tests_breakdown": {
+      "knowledge_updater": 20,
+      "reference_data": 52,
+      "tools_registry": 52
+    },
+    "exit_code": 0
+  }
+}
